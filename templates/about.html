@@ -1,35 +1,67 @@
 {% extends 'base.html' %}
 
-{% block title %}About - AWS Capstone Project{% endblock %}
+{% block title %}About - Movie Review & Sentiment Analyzer{% endblock %}
 
 {% block content %}
-<div class="container" style="max-width: 800px; text-align: left;">
-    <h1 style="text-align: center; color: var(--primary-color);">About Us</h1>
-    <p>Welcome to the <strong>AWS Capstone Project Deployment</strong> portal. This platform is designed to bridge the
-        gap between theoretical knowledge and practical cloud implementation.</p>
+<div class="container" style="max-width: 900px; text-align: left; margin-top: 40px;">
 
-    <h3>Our Mission</h3>
-    <p>To provide students with a hands-on environment where they can deploy real-world applications using
-        industry-standard AWS services.</p>
+    <h1 style="text-align: center; color: var(--primary-color); margin-bottom: 25px;">
+        About Us
+    </h1>
 
-    <h3>Tech Stack Details</h3>
+    <p>
+        <strong>Movie Review & Sentiment Analyzer</strong> is a web-based application developed as part of an
+        AWS Capstone Project. The platform enables users to browse movies, submit reviews, and
+        analyze audience sentiment using interactive visualizations.
+    </p>
+
+    <h3>Project Objective</h3>
+    <p>
+        The primary goal of this project is to demonstrate how real-time user feedback can be
+        collected, processed, and visualized using modern web technologies and cloud infrastructure.
+        It bridges the gap between theoretical learning and practical deployment.
+    </p>
+
+    <h3>Core Features</h3>
     <ul>
-        <li><strong>Frontend:</strong> HTML, CSS, JavaScript for responsive and interactive UIs.</li>
-        <li><strong>Backend:</strong> Python Flask for robust API and application logic.</li>
-        <li><strong>Cloud Infrastructure:</strong> Amazon Web Services (AWS) ensures scalability and reliability.</li>
+        <li>Browse movies with ratings and review counts</li>
+        <li>Submit user reviews and star ratings</li>
+        <li>Automatic sentiment classification (Positive, Neutral, Negative)</li>
+        <li>Interactive charts for sentiment and rating trends</li>
     </ul>
 
-    <h3>Why AWS?</h3>
-    <p>AWS offers the broadest and deepest set of cloud services, making it the perfect choice for learning and
-        deploying modern applications. Our projects utilize:</p>
+    <h3>Technology Stack</h3>
     <ul>
-        <li><strong>IAM (Identity and Access Management):</strong> Securely managing access to services and resources.
-        </li>
-        <li><strong>DynamoDB:</strong> A fast and flexible NoSQL database service for any scale.</li>
-        <li><strong>Amazon SNS (Simple Notification Service):</strong> Fully managed messaging for microservices,
-            distributed systems, and serverless applications.</li>
-        <li><strong>Amazon EC2 (Elastic Compute Cloud):</strong> Secure and resizable compute capacity for virtually any
-            workload.</li>
+        <li><strong>Frontend:</strong> HTML, CSS, JavaScript for responsive and user-friendly design</li>
+        <li><strong>Backend:</strong> Python with Flask framework for application logic</li>
+        <li><strong>Data Handling:</strong> In-memory Python data structures for managing reviews and movies</li>
     </ul>
+
+    <h3>Cloud & AWS Integration</h3>
+    <p>
+        This project is designed with cloud scalability in mind and follows AWS best practices.
+        The application architecture aligns with real-world cloud deployment standards.
+    </p>
+
+    <ul>
+        <li><strong>Amazon EC2:</strong> Hosting the Flask web application</li>
+        <li><strong>AWS IAM:</strong> Secure access and role-based permissions</li>
+        <li><strong>AWS SNS:</strong> Event-driven notifications and messaging (conceptual integration)</li>
+    </ul>
+
+    <h3>Academic Relevance</h3>
+    <p>
+        This project serves as a learning platform for understanding full-stack development,
+        cloud deployment concepts, and sentiment analysis. It is suitable for academic evaluation,
+        demonstrations, and future enhancements.
+    </p>
+
+    <h3>Future Enhancements</h3>
+    <p>
+        Future versions of this application can include advanced machine learning models,
+        real-time database integration, user authentication, and large-scale cloud deployment
+        for handling high traffic.
+    </p>
+
 </div>
 {% endblock %}

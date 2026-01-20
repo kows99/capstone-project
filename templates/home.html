@@ -1,12 +1,40 @@
 {% extends 'base.html' %}
 
-{% block title %}Home - Dashboard{% endblock %}
+{% block title %}Dashboard{% endblock %}
 
 {% block content %}
 <div class="container">
     <h1>Hello, {{ username }}!</h1>
-    <p>Welcome to your student dashboard.</p>
-    <p>Here you can manage your project enrollments and view status.</p>
-    <a href="{{ url_for('logout') }}"><button style="background-color: #dc3545; margin-top: 1rem;">Logout</button></a>
+    <p>Welcome to <b>Cinema Pulse</b>-your movie feedback analysis</p>
+    <p>Here you can:</p>
+    <ul>
+        <li>📽️ Select a movie</li>
+        <li>✍️ Submit your feedback and rating</li>
+        <li>📊 View positive and negative review analysis</li>
+        <li>📈 See charts and overall sentiment percentage</li>
+    </ul>
+    
+   
+    <div style="margin-top: 20px;">
+        <a href="{{ url_for('select_movie') }}">
+            <button style="padding:10px 20px; background-color:#28a745; color:white; border:none; border-radius:5px;">
+                Give Feedback 🎯
+            </button>
+        </a>
+
+        <a href="{{ url_for('view_analysis') }}">
+            <button style="padding:10px 20px; background-color:#007bff; color:white; border:none; border-radius:5px; margin-left:10px;">
+                View Analysis 📊
+            </button>
+        </a>
+    </div>
+
+    <div style="margin-top: 25px;">
+        <a href="{{ url_for('logout') }}">
+            <button style="padding:8px 18px; background-color:#dc3545; color:white; border:none; border-radius:5px;">
+                Logout
+            </button>
+        </a>
+    </div>
 </div>
 {% endblock %}

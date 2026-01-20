@@ -53,11 +53,26 @@ def logout():
     session.pop('username', None)
     return redirect(url_for('index'))
 
-@app.route('/select_movie')
+@app.route('/movies')
 def select_movie():
     return render_template('movies.html')
 
+@app.route('/feedback/<movie>', methods=['GET', 'POST'])
+def feedback(movie):
+    if request.method == 'POST':
+        review = request.form['review']
+        rating = request.form['rating']
 
+        # For now just print (later store in DB / CSV)
+        print(movie, review, rating)
+
+        return redirect(url_for('dashboard'))
+
+    return render_template('feedback.html', movie=movie)
+
+@app.route('/analysis')
+def view_analysis():
+    return render_template('analysis.html')
 
 if __name__ == '__main__':
     app.run(debug=True, port=8000)

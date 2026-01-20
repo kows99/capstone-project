@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}Feedback{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Feedback for <span style="color:#007bff;">{{ movie }}</span></h2>
+
+    <form method="POST">
+        <label>Rating:</label><br>
+        <select name="rating" required>
+            <option value="">Select</option>
+            <option value="5">⭐⭐⭐⭐⭐</option>
+            <option value="4">⭐⭐⭐⭐</option>
+            <option value="3">⭐⭐⭐</option>
+            <option value="2">⭐⭐</option>
+            <option value="1">⭐</option>
+        </select>
+
+        <br><br>
+
+        <label>Your Review:</label><br>
+        <textarea name="review" rows="5" placeholder="Write your review..." required></textarea>
+
+        <br><br>
+
+        <button type="submit" class="btn btn-success">Submit Feedback</button>
+    </form>
+</div>
+{% endblock %}

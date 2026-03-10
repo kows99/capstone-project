@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block title %}Thank You! - CinemaPulse{% endblock %}
+{% block content %}
+<div style="text-align: center; max-width: 700px; margin: 0 auto;">
+    <div style="font-size: 5rem; color: #10b981; margin-bottom: 1rem;">✅</div>
+    <h1 class="gradient-title">Thank You, {{ session.username }}!</h1>
+    <p style="font-size: 1.3rem; color: #bdbeba; margin-bottom: 3rem;">
+        Your <strong>{{ session.get('rating', '?') }}⭐</strong> rating for <strong>"{{ session.get('selected_movie', 'N/A') }}"</strong> 
+        helps improve cinema experience instantly.
+    </p>
+    
+    <div class="card">
+        <h3 style="color: var(--red);">📝 Your Feedback Summary</h3>
+        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; flex-wrap: wrap; padding: 1rem;">
+            <strong style="color: var(--black);">{{ session.get('selected_movie', 'N/A') }}</strong>
+            <span style="background: linear-gradient(135deg, var(--red), #b91c1c); color: #FFD700; padding: 0.5rem 1.5rem; border-radius: 25px; font-weight: 700; box-shadow: 0 4px 15px rgba(220,38,38,0.3);">
+                {{ session.get('rating', '?') }}/5 <span style="font-size: 1.5rem;">⭐</span>
+            </span>
+        </div>
+        <p style="color: #171718; font-style: italic; padding: 1.5rem; background: rgba(220,38,38,0.08); border-radius: 16px; margin-top: 1rem; border-left: 4px solid var(--red);">
+            "{{ session.get('review', 'No review provided')[:120] }}{% if session.get('review', '').__len__() > 120 %}...{% endif %}"
+        </p>
+    </div>
+
+    <div class="card" style="margin-top: 2rem;">
+        <h3 style="color: var(--red);">📊 Live System Stats</h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; text-align: center; margin-top: 1.5rem;">
+            <div>
+                <div id="liveTotalFeedback" style="font-size: 2.8rem; font-weight: 800; color: var(--red); margin-bottom: 0.5rem;">127</div>
+                <div style="color: #94a3b8; font-size: 1rem; font-weight: 500;">Total Feedbacks</div>
+            </div>
+            <div>
+                <div id="liveAvgRating" style="font-size: 2.8rem; font-weight: 800; color: #f59e0b; margin-bottom: 0.5rem;">4.2<span style="font-size: 1.5rem;">⭐</span></div>
+                <div style="color: #94a3b8; font-size: 1rem; font-weight: 500;">Avg Rating</div>
+            </div>
+            <div>
+                <div id="liveCount" style="font-size: 2.8rem; font-weight: 800; color: #10b981; margin-bottom: 0.5rem;">127</div>
+                <div style="color: #94a3b8; font-size: 1rem; font-weight: 500;">Live Users</div>
+            </div>
+        </div>
+    </div>
+    
+    <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 3rem; flex-wrap: wrap;">
+        <a href="{{ url_for('movies') }}" class="btn" style="padding: 1rem 2.5rem; background: linear-gradient(135deg, #10b981, #059669);">
+            🎬 Rate Another Movie
+        </a>
+        <a href="{{ url_for('dashboard') }}" class="btn" style="padding: 1rem 2.5rem; background: linear-gradient(135deg, var(--red), #b91c1c); box-shadow: 0 10px 30px rgba(220,38,38,0.4);">
+            📊 Live Dashboard
+        </a>
+        <a href="{{ url_for('analysis') }}" class="btn" style="padding: 1rem 2.5rem; background: linear-gradient(135deg, #3b82f6, #1d4ed8);">
+            📈 Full Analysis
+        </a>
+    </div>
+</div>
+
+<script>
+function updateLiveStats() {
+    fetch('/api/stats')
+        .then(r => r.json())
+        .then(data => {
+            document.getElementById('liveTotalFeedback').textContent = data.total_feedback;
+            document.getElementById('liveAvgRating').innerHTML = data.avg_rating + '<span style="font-size: 1.5rem;">⭐</span>';
+            document.getElementById('liveCount').textContent = data.live_count;
+        })
+        .catch(() => {});  
+}
+
+setInterval(updateLiveStats, 3000);
+updateLiveStats();  
+</script>
+{% endblock %}

@@ -1,0 +1,226 @@
+[
+  {
+    "movie": "Blood Moon Rising",
+    "rating": 5,
+    "review": "Scary but very nice!",
+    "user": "kowshalyavetrivel",
+    "sentiment": "positive",
+    "time": "2026-01-25T15:15:03.608281"
+  },
+  {
+    "movie": "Scarlet Shadows",
+    "rating": 2,
+    "review": "not that much thriller..",
+    "user": "kowshalyavetrivel",
+    "sentiment": "negative",
+    "time": "2026-01-25T15:15:45.203022"
+  },
+  {
+    "movie": "Dark Ember",
+    "rating": 4,
+    "review": "okay great movie",
+    "user": "kowshalyavetrivel",
+    "sentiment": "positive",
+    "time": "2026-01-25T15:16:10.063783"
+  },
+  {
+    "movie": "Crimson Vendetta",
+    "rating": 3,
+    "review": "good",
+    "user": "deviseshamalini",
+    "sentiment": "positive",
+    "time": "2026-01-25T15:17:10.890435"
+  },
+  {
+    "movie": "Red Fury",
+    "rating": 1,
+    "review": "nice",
+    "user": "kowshalyavetrivel",
+    "sentiment": "positive",
+    "time": "2026-01-25T16:50:48.685093"
+  },
+  {
+    "movie": "Red Fury",
+    "rating": 1,
+    "review": "nice music but bad story",
+    "user": "kowshalyavetrivel",
+    "sentiment": "negative",
+    "time": "2026-01-25T16:51:32.444418"
+  },
+  {
+    "movie": "Crimson Vendetta",
+    "rating": 1,
+    "review": "nice",
+    "user": "kowshalyavetrivel",
+    "sentiment": "positive",
+    "time": "2026-01-27T21:43:59.383386"
+  },
+  {
+    "movie": "Tourist Family",
+    "rating": 5,
+    "review": "Once of the best movie in 2025! I really enjoyed.",
+    "user": "kowshalyavetrivel",
+    "sentiment": "positive",
+    "time": "2026-01-27T22:43:15.071568"
+  },
+  {
+    "movie": "Blood Moon Rising",
+    "rating": 5,
+    "review": "very nice horror movie..",
+    "user": "kowshalyavetrivel",
+    "sentiment": "negative",
+    "time": "2026-01-27T22:59:15.643327"
+  },
+  {
+    "movie": "Dragon",
+    "rating": 5,
+    "review": "good movie....",
+    "user": "keke",
+    "sentiment": "positive",
+    "time": "2026-01-28T14:05:19.890008"
+  },
+  {
+    "movie": "Retro",
+    "rating": 1,
+    "review": "good music composition but bad story",
+    "user": "deviseshamalini",
+    "sentiment": "negative",
+    "time": "2026-01-28T14:58:30.478258"
+  },
+  {
+    "movie": "Retro",
+    "rating": 4,
+    "review": "I love this movie.",
+    "user": "Kowshalya V",
+    "sentiment": "positive",
+    "time": "2026-02-03T09:52:18.290389"
+  },
+  {
+    "movie": "Dragon",
+    "rating": 1,
+    "review": "One of the worst movie. Love the music.",
+    "user": "Kowshalya V",
+    "sentiment": "neutral",
+    "time": "2026-02-03T09:53:10.995703"
+  },
+  {
+    "movie": "Crimson Vendetta",
+    "rating": 2,
+    "review": "good",
+    "user": "Kowshalya V",
+    "sentiment": "positive",
+    "time": "2026-02-03T11:01:43.855198"
+  },
+  {
+    "movie": "Anand",
+    "rating": 5,
+    "review": "One of the best film ever in telugu cinema.",
+    "user": "Kowshalya V",
+    "sentiment": "positive",
+    "time": "2026-02-03T13:42:11.942936"
+  },
+  {
+    "movie": "Gothavari",
+    "rating": 5,
+    "review": "lovely movie..!!!",
+    "user": "Kowshalya V",
+    "sentiment": "positive",
+    "time": "2026-02-03T13:43:18.535440"
+  },
+  {
+    "movie": "Anand",
+    "rating": 5,
+    "review": "Very nice..",
+    "user": "deviseshamalini",
+    "sentiment": "positive",
+    "time": "2026-02-03T14:09:15.387086"
+  },
+  {
+    "movie": "Crimson Vendetta",
+    "rating": 2,
+    "review": "bad acting",
+    "user": "kowshalyavetrivel",
+    "sentiment": "negative",
+    "time": "2026-02-03T15:21:31.226899"
+  },
+  {
+    "movie": "Crimson Vendetta",
+    "rating": 1,
+    "review": "good",
+    "user": "deviseshamalini",
+    "sentiment": "positive",
+    "time": "2026-02-03T15:25:10.655876"
+  },
+  {
+    "movie": "Gothavari",
+    "rating": 5,
+    "review": "Wonderful movie..\r\n",
+    "user": "kirthika",
+    "sentiment": "positive",
+    "time": "2026-02-03T18:28:29.460074"
+  },
+  {
+    "movie": "City Of Ember",
+    "rating": 3,
+    "review": "very  nice\r\n",
+    "user": "kowshalyavetrivel",
+    "sentiment": "positive",
+    "time": "2026-02-03T20:22:17.797679"
+  },
+  {
+    "movie": "Gothavari",
+    "rating": 5,
+    "review": "Aww!! Nice love story..",
+    "user": "Kowshalya V",
+    "sentiment": "positive",
+    "time": "2026-02-03T22:05:46.120948"
+  },
+  {
+    "movie": "Anand",
+    "rating": 5,
+    "review": "Anand is a simple and heartwarming romantic drama with soulful music and realistic characters that make the love story feel genuine and refreshing. ",
+    "user": "Kowshalya ",
+    "sentiment": "positive",
+    "time": "2026-02-06T23:13:04.958140"
+  },
+  {
+    "movie": "Crimson Vendetta",
+    "rating": 5,
+    "review": "good",
+    "user": "dharshana",
+    "sentiment": "positive",
+    "time": "2026-03-05T16:34:56.626587"
+  },
+  {
+    "movie": "Good Bad Ugly",
+    "rating": 2,
+    "review": "good music but bad story line\r\n",
+    "user": "Kowshalya V",
+    "sentiment": "negative",
+    "time": "2026-03-06T13:30:04.493228"
+  },
+  {
+    "movie": "Sweetheart",
+    "rating": 3,
+    "review": "good\r\n",
+    "user": "kowshalyavetrivel",
+    "sentiment": "positive",
+    "time": "2026-03-06T14:06:12.065292"
+  },
+  {
+    "movie": "City Of Ember",
+    "rating": 1,
+    "review": "i don't like this movie",
+    "user": "kowshalyavetrivel",
+    "sentiment": "negative",
+    "time": "2026-03-06T14:08:05.751571"
+  },
+  {
+    "movie": "Madharaasi",
+    "rating": 4,
+    "review": "nice movie but sad music composition\r\n",
+    "user": "kirthika",
+    "sentiment": "negative",
+    "time": "2026-03-10T10:23:09.958707"
+  }
+]

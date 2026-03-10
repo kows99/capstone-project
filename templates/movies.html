@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Movies - CinemaPulse{% endblock %}
+{% block content %}
+<div class="gradient-title" style="text-align: center; margin-bottom: 2rem;">🎥 Choose Movie</div>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+    {% for movie in movies %}
+    <div class="card" style="text-align: center; padding: 2rem;">
+        <!-- ✅ IMAGE -->
+        <img src="{{ movie.image_url }}" alt="{{ movie.title }}" 
+             style="width: 100%; max-width: 220px; height: 320px; object-fit: cover; border-radius: 16px; margin-bottom: 1rem; box-shadow: 0 8px 32px rgba(0,0,0,0.3);">
+        
+        <!-- ✅ TITLE & GENRE -->
+        <h3 style="color: var(--red); margin-bottom: 0.5rem;">{{ movie.title }}</h3>
+        <p style="color: #0c0c0c; margin-bottom: 2rem; font-weight: 500;">{{ movie.genre }}</p>
+        
+        <!-- ✅ RATE BUTTON -->
+        <a href="{{ url_for('feedback', movie_id=movie.id) }}" class="btn" 
+           style="display: block; margin: 0 auto; padding: 1rem 2rem; background: var(--red); color: white; text-decoration: none; border-radius: 25px; font-weight: bold;">
+           ⭐ Rate This Movie
+        </a>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+    <h1 class="gradient-title" style="text-align: center;"> All Feedbacks Analytics</h1>
+    
+    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; margin: 2rem 0;">
+        <div class="card">
+            <h2 style="color:brown">{{ total_feedback }}</h2>
+            <p>Total Feedbacks</p>
+        </div>
+        <div class="card">
+            <h2 style="color: #03581bf5;">{{ sentiments.positive }}</h2>
+            <p>😊 Positive</p>
+        </div>
+        <div class="card">
+            <h2 style="color: #fceb07;">{{ sentiments.neutral }}</h2>
+            <p>😐 Neutral</p>
+        </div>
+        <div class="card">
+            <h2 style="color: #ef4444;">{{ sentiments.negative }}</h2>
+            <p>😞 Negative</p>
+        </div>
+    </div>
+
+    <div class="card" style="max-width: 1000px; margin: 0 auto;">
+        <h3 style="text-align: center;">Latest Feedbacks</h3>
+        <div style="max-height: 400px; overflow-y: auto;">
+            {% for fb in feedbacks %}
+            <div style="padding: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <strong>{{ fb.movie }}</strong> • {{ fb.rating }}⭐<br>
+                    <small>"{{ fb.review[:60] }}..."</small>
+                </div>
+                <span style="padding: 0.5rem 1rem; border-radius: 20px; font-weight: bold;
+                   
+                {% if fb.sentiment == 'positive' %}
+                    background: rgba(16,185,129,0.2);
+                    color: #03581bf5;
+                    {% elif fb.sentiment == 'neutral' %}
+                    background: rgba(239,68,68,0.1); 
+                    color: #fceb07; 
+                    {% else %}
+                    background: rgba(239,68,68,0.2); 
+                    color: #ef4444;
+                    {% endif %}">
+                    {{ fb.sentiment.title() }}
+                </span>
+            </div>
+            {% endfor %}
+            {% if not feedbacks %}
+            <div style="text-align: center; padding: 3rem; color: #3c1b72cc;">
+                No feedbacks yet → Rate a movie!
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 3rem;">
+        <a href="{{ url_for('movies') }}" class="btn">Rate More →</a>
+    </div>
+</div>
+{% endblock %}

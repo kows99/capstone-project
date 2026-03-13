@@ -1,0 +1,23 @@
+[
+  {
+    "username": "Kowshalya V",
+    "email": "kowshalyavetrivel@gmail.com",
+    "password": "mathi81",
+    "signup_date": "2026-03-12T09:23:13.688985",
+    "total_ratings": 0,
+    "movies_rated": []
+  },
+  {
+    "username": "deviseshamalini",
+    "email": "sesha@gmail.com",
+    "password": "maliniii",
+    "signup_date": "2026-03-12T09:30:46.944010",
+    "total_ratings": 0,
+    "movies_rated": []
+  },
+  {
+    "username": "kirthika",
+    "email": "kirthi08@gmail.com",
+    "signup_date": "2026-03-13T13:39:56.351596"
+  }
+]

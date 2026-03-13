@@ -126,6 +126,14 @@
             </ul>
         </div>
     </nav>
+<nav>
+    <a href="{{ url_for('home') }}">Login</a>
+    <a href="{{ url_for('register') }}">Register</a>
+    {% if session.username %}
+        <a href="{{ url_for('movies') }}">Movies</a>
+        <a href="{{ url_for('logout') }}">Logout</a>
+    {% endif %}
+</nav>
 
     <div class="container">
         {% with messages = get_flashed_messages() %}

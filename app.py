@@ -58,29 +58,87 @@ def save_feedback(movie_title, rating, review, username):
     with open(FEEDBACK_FILE, 'w') as f:
         json.dump(feedbacks, f, indent=2)
     return feedback
+    
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        username = request.form.get('username')
+        email = request.form.get('email')
+
+        users = load_users()
+
+        # Check duplicate username
+        for user in users:
+            if user['username'] == username:
+                flash('❌ Username already exists!')
+                return render_template('register.html')
+
+            if user['email'] == email:
+                flash('❌ Email already registered!')
+                return render_template('register.html')
+
+        new_user = {
+            'username': username,
+            'email': email,
+            'signup_date': datetime.now().isoformat()
+        }
+
+        users.append(new_user)
+        save_users(users)
+
+        flash('✅ Registration successful! Please login.')
+        return redirect(url_for('login'))
+
+    return render_template('register.html')
+
+
+def load_users():
+    try:
+        with open('users.json', 'r') as f:
+            return json.load(f)
+    except:
+        return []
+
+def save_users(users):
+    with open('users.json', 'w') as f:
+        json.dump(users, f, indent=2)
+
+@app.route('/')
+def home():
+    return render_template('home.html')  # Landing page with Register/Login links
 
 @app.route('/movies')
 def movies():
     if 'username' not in session:
-        return redirect(url_for('home'))
-    return render_template('movies.html', movies=MOVIES, feedback_count=feedback_count)
+        return redirect(url_for('login'))  # ✅ CHANGED FROM 'home'
+    return render_template('movies.html', movies=MOVIES, feedback_count=feedback_count())
 
-@app.route('/', methods=['GET', 'POST'])
-def home():
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
     if request.method == 'POST':
         username = request.form.get('username')
         email = request.form.get('email')
-        if username and email:
-            session['username'] = username
-            session['email'] = email
-            return redirect(url_for('movies'))
-        flash('Please enter both username and email')
-    return render_template('home.html')
+        
+        # ✅ LOCAL JSON verification
+        users = load_users()
+        for user in users:
+            if user['username'] == username and user['email'] == email:
+                session['username'] = username
+                flash('✅ Login successful!')
+                return redirect(url_for('movies'))
+        
+        flash('❌ Invalid credentials!')
+    
+    return render_template('login.html')
+
+
 
 @app.route('/dashboard')
 def dashboard():
     if 'username' not in session:
-        return redirect(url_for('home'))
+        return redirect(url_for('login'))  # ✅ Changed from 'home'
+
     
     feedbacks = load_feedbacks()
     total_feedback = len(feedbacks) 
@@ -119,18 +177,18 @@ def feedback(movie_id):
         return redirect(url_for('dashboard'))
     
     if 'username' not in session:
-        return redirect(url_for('home'))
+        return redirect(url_for('login'))
     movie = MOVIES[movie_id-1]
     return render_template('feedback.html', movie=movie)
 
 @app.route('/analysis')
 def analysis():
     if 'username' not in session:
-        return redirect(url_for('home'))
-    
-    # Same data as dashboard!
+        return redirect(url_for('login'))
     feedbacks = load_feedbacks()
     sentiments = {'positive': 0, 'neutral': 0, 'negative': 0}
+    total_feedbacks = len(feedbacks)
+    average_rating = round(sum(fb['rating'] for fb in feedbacks) / total_feedbacks, 1) if total_feedbacks > 0 else 0
     for fb in feedbacks:
         sentiments[fb.get('sentiment', 'neutral')] += 1
     
@@ -138,13 +196,15 @@ def analysis():
                          rating=session.get('rating', 0),
                          review=session.get('review', 'No review yet'),
                          movie=session.get('selected_movie', 'No movie'),
-                         sentiments=sentiments)
+                         sentiments=sentiments,
+                         total_feedbacks=total_feedbacks,
+                         average_rating=average_rating)
 
 
 @app.route('/thankyou')
 def thank_you(): 
     if 'username' not in session:
-        return redirect(url_for('home'))
+        return redirect(url_for('login'))
     return render_template('thankyou.html')
 
 @app.route('/about')
@@ -155,7 +215,7 @@ def about():
 def logout():
     session.clear()
     flash('Logged out successfully')
-    return redirect(url_for('home'))
+    return redirect(url_for('login'))
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -72,30 +72,5 @@
         <a href="{{ url_for('dashboard') }}" class="btn" style="background: linear-gradient(135deg, #3b82f6, #1d4ed8);">📊 All Feedbacks</a>
         <a href="{{ url_for('logout') }}" class="btn" style="background: linear-gradient(135deg, #6b7280, #4b5563);">Logout</a>
     </div>
-{% extends 'base.html' %}
-
-{% block title %}Analysis{% endblock %}
-
-{% block content %}
-<div class="container">
-    <h2>Movie Feedback Analysis</h2>
-
-    <p>
-        This page displays the overall sentiment analysis of movie reviews
-        submitted by users.
-    </p>
-
-    <ul>
-        <li>✅ Positive Reviews: <b>0%</b></li>
-        <li>❌ Negative Reviews: <b>0%</b></li>
-    </ul>
-
-    <p>
-        Charts and detailed analysis will be displayed here in the next phase.
-    </p>
-
-    <a href="{{ url_for('select_movie') }}">
-        <button class="btn btn-primary">Give More Feedback</button>
-    </a>
 </div>
 {% endblock %}

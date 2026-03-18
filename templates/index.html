@@ -25,38 +25,3 @@
     </div>
 </body>
 </html>
-
-{% extends 'base.html' %}
-
-{% block title %}Welcome - AWS Capstone Project{% endblock %}
-
-{% block content %}
-<div class="hero">
-    <h1>Movie Review & Sentiment Analyzer</h1>
-    <p>Share your opinion. See public mood.</p>
-    {% if not session.get('username') and not session.get('admin') %}
-    <div style="margin-top: 2rem;">
-        <a href="{{ url_for('login') }}"><button>Login</button></a>
-        <a href="{{ url_for('signup') }}" style="margin-left: 1rem;"><button
-                style="background-color: var(--secondary-color);">Signup</button></a>
-    </div>
-    {% endif %}
-</div>
-
-<section class="features">
-    <div class="feature-card">
-        <h3>Easy Reviews</h3>
-        <p>Quickly submit your movie reviews and ratings.</p>
-    </div>
-    <div class="feature-card">
-        <h3>Live Charts</h3>
-        <p>Visualize audience sentiment with dynamic charts.</p>
-        <ul style="text-align: left; padding-left: 1.5rem;">
-        </ul>
-    </div>
-    <div class="feature-card">
-        <h3>Sentiment Analysis</h3>
-        <p>Analyze movie feedback as positive, negative, or neutral.</p>
-    </div>
-</section>
-{% endblock %}

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 from flask import Flask, render_template, request, redirect, url_for, session, flash, jsonify
 import time
 import random
@@ -59,87 +58,29 @@ def save_feedback(movie_title, rating, review, username):
     with open(FEEDBACK_FILE, 'w') as f:
         json.dump(feedbacks, f, indent=2)
     return feedback
-    
-@app.route('/register', methods=['GET', 'POST'])
-def register():
-    if request.method == 'POST':
-        username = request.form.get('username')
-        email = request.form.get('email')
-
-        users = load_users()
-
-        # Check duplicate username
-        for user in users:
-            if user['username'] == username:
-                flash('❌ Username already exists!')
-                return render_template('register.html')
-
-            if user['email'] == email:
-                flash('❌ Email already registered!')
-                return render_template('register.html')
-
-        new_user = {
-            'username': username,
-            'email': email,
-            'signup_date': datetime.now().isoformat()
-        }
-
-        users.append(new_user)
-        save_users(users)
-
-        flash('✅ Registration successful! Please login.')
-        return redirect(url_for('login'))
-
-    return render_template('register.html')
-
-
-def load_users():
-    try:
-        with open('users.json', 'r') as f:
-            return json.load(f)
-    except:
-        return []
-
-def save_users(users):
-    with open('users.json', 'w') as f:
-        json.dump(users, f, indent=2)
-
-@app.route('/')
-def home():
-    return render_template('home.html')  # Landing page with Register/Login links
 
 @app.route('/movies')
 def movies():
     if 'username' not in session:
-        return redirect(url_for('login'))  # ✅ CHANGED FROM 'home'
-    return render_template('movies.html', movies=MOVIES, feedback_count=feedback_count())
+        return redirect(url_for('home'))
+    return render_template('movies.html', movies=MOVIES, feedback_count=feedback_count)
 
-
-@app.route('/login', methods=['GET', 'POST'])
-def login():
+@app.route('/', methods=['GET', 'POST'])
+def home():
     if request.method == 'POST':
         username = request.form.get('username')
         email = request.form.get('email')
-        
-        # ✅ LOCAL JSON verification
-        users = load_users()
-        for user in users:
-            if user['username'] == username and user['email'] == email:
-                session['username'] = username
-                flash('✅ Login successful!')
-                return redirect(url_for('movies'))
-        
-        flash('❌ Invalid credentials!')
-    
-    return render_template('login.html')
-
-
+        if username and email:
+            session['username'] = username
+            session['email'] = email
+            return redirect(url_for('movies'))
+        flash('Please enter both username and email')
+    return render_template('home.html')
 
 @app.route('/dashboard')
 def dashboard():
     if 'username' not in session:
-        return redirect(url_for('login'))  # ✅ Changed from 'home'
-
+        return redirect(url_for('home'))
     
     feedbacks = load_feedbacks()
     total_feedback = len(feedbacks) 
@@ -178,18 +119,18 @@ def feedback(movie_id):
         return redirect(url_for('dashboard'))
     
     if 'username' not in session:
-        return redirect(url_for('login'))
+        return redirect(url_for('home'))
     movie = MOVIES[movie_id-1]
     return render_template('feedback.html', movie=movie)
 
 @app.route('/analysis')
 def analysis():
     if 'username' not in session:
-        return redirect(url_for('login'))
+        return redirect(url_for('home'))
+    
+    # Same data as dashboard!
     feedbacks = load_feedbacks()
     sentiments = {'positive': 0, 'neutral': 0, 'negative': 0}
-    total_feedbacks = len(feedbacks)
-    average_rating = round(sum(fb['rating'] for fb in feedbacks) / total_feedbacks, 1) if total_feedbacks > 0 else 0
     for fb in feedbacks:
         sentiments[fb.get('sentiment', 'neutral')] += 1
     
@@ -197,104 +138,24 @@ def analysis():
                          rating=session.get('rating', 0),
                          review=session.get('review', 'No review yet'),
                          movie=session.get('selected_movie', 'No movie'),
-                         sentiments=sentiments,
-                         total_feedbacks=total_feedbacks,
-                         average_rating=average_rating)
+                         sentiments=sentiments)
 
 
 @app.route('/thankyou')
 def thank_you(): 
     if 'username' not in session:
-        return redirect(url_for('login'))
-    return render_template('thankyou.html')
-=======
-from flask import Flask, render_template, request, redirect, url_for, session
-
-app = Flask(__name__)
-app.secret_key = 'your_secret_key_here'
-
-# In-memory database (dictionary)
-users = {}
-
-
-@app.route('/')
-def index():
-    if 'username' in session:
         return redirect(url_for('home'))
-    return render_template('index.html')
->>>>>>> b0ef6ab09cff71738ae80a216dcd73d92db8473e
+    return render_template('thankyou.html')
 
 @app.route('/about')
 def about():
     return render_template('about.html')
 
-<<<<<<< HEAD
 @app.route('/logout')
 def logout():
     session.clear()
     flash('Logged out successfully')
-    return redirect(url_for('login'))
+    return redirect(url_for('home'))
 
 if __name__ == '__main__':
     app.run(debug=True)
-=======
-@app.route('/signup', methods=['GET', 'POST'])
-def signup():
-    if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
-        
-        if username in users:
-            return "User already exists!"
-        
-        users[username] = password
-        return redirect(url_for('login'))
-    return render_template('signup.html')
-
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
-        
-        if username in users and users[username] == password:
-            session['username'] = username
-            return redirect(url_for('home'))
-        return "Invalid credentials!"
-    return render_template('login.html')
-
-@app.route('/home')
-def home():
-    if 'username' in session:
-        return render_template('home.html', username=session['username'])
-    return redirect(url_for('login'))
-
-@app.route('/logout')
-def logout():
-    session.pop('username', None)
-    return redirect(url_for('index'))
-
-@app.route('/movies')
-def select_movie():
-    return render_template('movies.html')
-
-@app.route('/feedback/<movie>', methods=['GET', 'POST'])
-def feedback(movie):
-    if request.method == 'POST':
-        review = request.form['review']
-        rating = request.form['rating']
-
-        # For now just print (later store in DB / CSV)
-        print(movie, review, rating)
-
-        return redirect(url_for('dashboard'))
-
-    return render_template('feedback.html', movie=movie)
-
-@app.route('/analysis')
-def view_analysis():
-    return render_template('analysis.html')
-
-if __name__ == '__main__':
-    app.run(debug=True, port=8000)
->>>>>>> b0ef6ab09cff71738ae80a216dcd73d92db8473e

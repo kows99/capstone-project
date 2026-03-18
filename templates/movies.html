@@ -21,40 +21,5 @@
         </a>
     </div>
     {% endfor %}
-{% extends 'base.html' %}
-
-{% block title %}Select Movie{% endblock %}
-
-{% block content %}
-<div class="container">
-    <h2>Select a Movie</h2>
-
-    <div class="movie-grid">
-
-        <div class="movie-card">
-            <img src="{{ url_for('static', filename='images/leo.jpg') }}" alt="Leo">
-            <h3>Leo</h3>
-            <a href="{{ url_for('feedback', movie='Leo') }}">
-                <button class="btn btn-primary">Give Feedback</button>
-            </a>
-        </div>
-
-        <div class="movie-card">
-            <img src="{{ url_for('static', filename='images/jailer.jpg') }}" alt="Jailer">
-            <h3>Jailer</h3>
-            <a href="{{ url_for('feedback', movie='Jailer') }}">
-                <button class="btn btn-primary">Give Feedback</button>
-            </a>
-        </div>
-
-        <div class="movie-card">
-            <img src="{{ url_for('static', filename='images/kgf.jpg') }}" alt="KGF">
-            <h3>KGF</h3>
-            <a href="{{ url_for('feedback', movie='KGF') }}">
-                <button class="btn btn-primary">Give Feedback</button>
-            </a>
-        </div>
-
-    </div>
 </div>
 {% endblock %}

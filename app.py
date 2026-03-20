@@ -59,6 +59,30 @@ def save_feedback(movie_title, rating, review, username):
         json.dump(feedbacks, f, indent=2)
     return feedback
 
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        username = request.form.get('username')
+        email = request.form.get('email')
+        password = request.form.get('password')
+
+        # Check duplicate email
+        for user in users_db:
+            if user['email'] == email:
+                flash('❌ Email already registered!')
+                return render_template('register.html')
+
+        users_db.append({
+            'username': username,
+            'email': email,
+            'password': password
+        })
+
+        flash('✅ Registered successfully! Please login.')
+        return redirect(url_for('login'))
+
+    return render_template('register.html')
+
 @app.route('/movies')
 def movies():
     if 'username' not in session:
@@ -66,16 +90,49 @@ def movies():
     return render_template('movies.html', movies=MOVIES, feedback_count=feedback_count)
 
 @app.route('/', methods=['GET', 'POST'])
-def home():
+def login():
     if request.method == 'POST':
-        username = request.form.get('username')
         email = request.form.get('email')
-        if username and email:
-            session['username'] = username
-            session['email'] = email
-            return redirect(url_for('movies'))
-        flash('Please enter both username and email')
-    return render_template('home.html')
+        password = request.form.get('password')
+
+        for user in users_db:
+            # ✅ THIS IS THE CHECK YOU ASKED
+            if user['email'] == email and user['password'] == password:
+                session['username'] = user['username']
+                session['email'] = user['email']
+                return redirect(url_for('movies'))
+
+        # ❌ If no match
+        flash('❌ Invalid email or password!')
+        return render_template('login.html')
+
+    return render_template('login.html')
+
+@app.route('/forgot', methods=['GET', 'POST'])
+def forgot():
+    if request.method == 'POST':
+        email = request.form.get('email')
+        new_password = request.form.get('password')
+
+        found = False
+
+        for user in users_db:
+            if user['email'] == email:
+                user['password'] = new_password
+                found = True
+
+                print("UPDATED USERS DB:", users_db)   # 👈 ADD HERE
+
+                flash('✅ Password updated successfully!')
+                break
+
+        if not found:
+            flash('❌ Email not found!')
+            return redirect(url_for('forgot'))
+
+        return redirect(url_for('login'))
+
+    return render_template('forgot.html')
 
 @app.route('/dashboard')
 def dashboard():
@@ -144,7 +201,7 @@ def analysis():
 @app.route('/thankyou')
 def thank_you(): 
     if 'username' not in session:
-        return redirect(url_for('home'))
+        return redirect(url_for('login'))
     return render_template('thankyou.html')
 
 @app.route('/about')
@@ -155,7 +212,7 @@ def about():
 def logout():
     session.clear()
     flash('Logged out successfully')
-    return redirect(url_for('home'))
+    return redirect(url_for('login'))
 
 if __name__ == '__main__':
     app.run(debug=True)

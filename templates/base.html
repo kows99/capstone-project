@@ -110,20 +110,23 @@
 <body>
     <nav class="navbar">
         <div class="nav-container">
-            <a href="{{ url_for('home') }}" class="logo">CinemaPulse</a>
-            <ul class="nav-links">
-                <li><a href="{{ url_for('home') }}" class="nav-link">Home</a></li>
-                <li><a href="{{ url_for('about') }}" class="nav-link">About</a></li>
-                {% if session.username %}
-                <li><span class="user-info">Hi, {{ session.username }}!</span></li>
-                <li><a href="{{ url_for('movies') }}" class="nav-link">Movies</a></li>
-                <li><a href="{{ url_for('dashboard') }}" class="nav-link">Dashboard</a></li>
-                <li><a href="{{ url_for('analysis') }}" class="nav-link">Analysis</a></li>
-                <li><a href="{{ url_for('logout') }}" class="nav-link">Logout</a></li>
-                {% else %}
-                <li><a href="{{ url_for('home') }}" class="nav-link">Login</a></li>
-                {% endif %}
-            </ul>
+            <a href="{{ url_for('login') }}" class="logo">CinemaPulse</a>
+<ul class="nav-links">
+    <li><a href="{{ url_for('login') }}" class="nav-link">Home</a></li>
+    <li><a href="{{ url_for('about') }}" class="nav-link">About</a></li>
+
+    {% if session.username %}
+    <li><span class="user-info">Hi, {{ session.username }}!</span></li>
+    <li><a href="{{ url_for('movies') }}" class="nav-link">Movies</a></li>
+    <li><a href="{{ url_for('dashboard') }}" class="nav-link">Dashboard</a></li>
+    <li><a href="{{ url_for('analysis') }}" class="nav-link">Analysis</a></li>
+    <li><a href="{{ url_for('logout') }}" class="nav-link">Logout</a></li>
+    
+    {% else %}
+    <li><a href="{{ url_for('login') }}" class="nav-link">Login</a></li>
+    <li><a href="{{ url_for('register') }}" class="nav-link">Register</a></li>
+    {% endif %}
+</ul>
         </div>
     </nav>
 
